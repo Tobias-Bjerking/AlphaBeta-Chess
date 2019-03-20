@@ -11,7 +11,8 @@ GameBoard::GameBoard(){
 }
 
 void GameBoard::setUpBoard(){
-	pieces[7][7] = new Pawn(WHITE);
+	pieces[4][4] = new Pawn(WHITE);
+	pieces[3][3] = new Pawn(BLACK);
 }
 
 
@@ -56,26 +57,23 @@ GameBoard& GameBoard::getInstance() {
 }
 
 void GameBoard::drawBoard(){
+	
 	SDL_RenderClear(renderer);
-	for (int i = 0; i < 8; i += 2) {
-		for (int j = 0; j < 8; j += 2) {
-			SDL_Rect rect = { j * 64, i * 64, 64, 64 };
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-			SDL_RenderFillRect(renderer, &rect);
-		}
-	}
 
-	for (int i = 1; i < 8; i += 2) {
-		for (int j = 1; j < 8; j += 2) {
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 8; j++) {
 			SDL_Rect rect = { j * 64, i * 64, 64, 64 };
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+			if(j%2 == i%2)
+				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+			else
+				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 			SDL_RenderFillRect(renderer, &rect);
 		}
 	}
 
 	SDL_Rect rect = { 8*64, 0, 64, 8*64 };
 	SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
-	//SDL_RenderFillRect(renderer, &rect);
+	SDL_RenderFillRect(renderer, &rect);
 
 	for (int i = 0; i < 8; i++){
 		for (int j = 0; j < 8; j++) {

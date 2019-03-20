@@ -20,6 +20,7 @@ public:
 	static GameBoard& getInstance();
 
 	SDL_Renderer* renderer;
+	Piece* pieces[8][8];
 
 	~GameBoard();
 private:
@@ -28,7 +29,6 @@ private:
 
 	void drawBoard();
 
-	Piece* pieces[8][8];
 
 
 	GameBoard(const GameBoard& other) = delete;
