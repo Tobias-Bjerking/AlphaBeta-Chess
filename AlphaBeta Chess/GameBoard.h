@@ -24,13 +24,15 @@ public:
 
 	static GameBoard& getInstance();
 
+	void move(int x, int y);
+
 	SDL_Renderer* renderer;
 	Piece* pieces[8][8];
 
 	~GameBoard();
 private:
 	GameBoard();
-
+	Position* selected = nullptr;
 
 	void drawBoard();
 

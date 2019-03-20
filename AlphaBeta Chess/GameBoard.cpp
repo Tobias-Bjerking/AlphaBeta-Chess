@@ -68,6 +68,14 @@ void GameBoard::run(){
 				running = false;
 				SDL_Quit();
 				break;
+
+			case SDL_MOUSEBUTTONDOWN:
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					int x = event.button.y / 64;
+					int y = event.button.x / 64;
+					move(x, y);
+				}
+				break;
 			}
 		}
 
@@ -80,6 +88,24 @@ void GameBoard::run(){
 GameBoard& GameBoard::getInstance() {
 	static GameBoard instance;
 	return instance;
+}
+
+void GameBoard::move(int x, int y){
+	if (selected) {
+		if (pieces[x][y] == nullptr || pieces[x][y]->color != pieces[selected->x][selected->y]->color) {
+			pieces[x][y] = pieces[selected->x][selected->y];
+			pieces[selected->x][selected->y] = nullptr;
+			selected = nullptr;
+		}
+		else {
+			selected = nullptr;
+		}
+	}
+	else {
+		if (pieces[x][y] != nullptr) {
+			selected = new Position(x, y);
+		}
+	}
 }
 
 void GameBoard::drawBoard(){
@@ -96,10 +122,6 @@ void GameBoard::drawBoard(){
 			SDL_RenderFillRect(renderer, &rect);
 		}
 	}
-
-	/*SDL_Rect rect = { 8*64, 0, 64, 8*64 };
-	SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
-	SDL_RenderFillRect(renderer, &rect);*/
 
 	for (int i = 0; i < 8; i++){
 		for (int j = 0; j < 8; j++) {
