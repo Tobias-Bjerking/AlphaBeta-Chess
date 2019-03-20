@@ -19,6 +19,7 @@ public:
 	SDL_Renderer* render;
 
 private:
+
 	int window_width = 576;
 	int window_height = 512;
 	bool running = true;
