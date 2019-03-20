@@ -16,9 +16,11 @@ public:
 	void run();
 
 	SDL_Window* window;
-	SDL_Renderer* render;
+	SDL_Renderer* renderer;
 
 private:
+
+	void drawBoard();
 
 	int window_width = 576;
 	int window_height = 512;
