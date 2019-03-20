@@ -1,17 +1,12 @@
 #include "GameBoard.h"
+#include "Window.h"
 
-
+#include <iostream>
 
 GameBoard::GameBoard(){
-	SDL_Init(SDL_INIT_EVERYTHING);
-	TTF_Init();
-
-	window = SDL_CreateWindow("Titel", 100, 100, window_width, window_height, 0);
-	renderer = SDL_CreateRenderer(window, -1, 0);
 }
 
 void GameBoard::setUpBoard() {
-
 	for (int i = 0; i < 8; i++) {
 		pieces[1][i] = new Pawn(BLACK);
 		pieces[6][i] = new Pawn(WHITE);
@@ -37,57 +32,16 @@ void GameBoard::setUpBoard() {
 
 	pieces[0][4] = new King(BLACK);
 	pieces[7][4] = new King(WHITE);
-
-
 }
 
 
 GameBoard::~GameBoard(){
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
-	TTF_Quit();
-	SDL_Quit();
+	
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			delete pieces[i][j];
 		}
 	}
-}
-
-void GameBoard::run(){
-	while (running) {
-		Uint32 sdlTicks = SDL_GetTicks();
-		Uint32 nextTick = sdlTicks + tickInterval;
-
-		drawBoard();
-
-		SDL_Event event;
-		while (SDL_PollEvent(&event)) {
-			switch (event.type) {
-			case SDL_QUIT:
-				running = false;
-				SDL_Quit();
-				break;
-
-			case SDL_MOUSEBUTTONDOWN:
-				if (event.button.button == SDL_BUTTON_LEFT) {
-					int x = event.button.y / 64;
-					int y = event.button.x / 64;
-					move(x, y);
-				}
-				break;
-			}
-		}
-
-		int delay = nextTick - SDL_GetTicks();
-		if (delay > 0)
-			SDL_Delay(delay);
-	}
-}
-
-GameBoard& GameBoard::getInstance() {
-	static GameBoard instance;
-	return instance;
 }
 
 void GameBoard::move(int x, int y){
@@ -109,17 +63,15 @@ void GameBoard::move(int x, int y){
 }
 
 void GameBoard::drawBoard(){
-	
-	SDL_RenderClear(renderer);
 
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			SDL_Rect rect = { j * 64, i * 64, 64, 64 };
 			if(j%2 == i%2)
-				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+				SDL_SetRenderDrawColor(Window::getInstance().renderer, 255, 255, 255, 255);
 			else
-				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-			SDL_RenderFillRect(renderer, &rect);
+				SDL_SetRenderDrawColor(Window::getInstance().renderer, 0, 0, 0, 255);
+			SDL_RenderFillRect(Window::getInstance().renderer, &rect);
 		}
 	}
 
@@ -131,6 +83,4 @@ void GameBoard::drawBoard(){
 			}
 		}
 	}
-
-	SDL_RenderPresent(renderer);
 }

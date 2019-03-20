@@ -1,0 +1,60 @@
+#include "Window.h"
+
+
+
+Window::Window(){
+	SDL_Init(SDL_INIT_EVERYTHING);
+	TTF_Init();
+
+	window = SDL_CreateWindow("A/B Chess", 100, 100, window_width, window_height, 0);
+	renderer = SDL_CreateRenderer(window, -1, 0);
+	gb = new GameBoard();
+}
+
+
+Window::~Window(){
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
+	TTF_Quit();
+	SDL_Quit();
+}
+
+void Window::setUpBoard(){
+	gb->setUpBoard();
+}
+
+void Window::draw(){
+	SDL_RenderClear(Window::getInstance().renderer);
+	gb->drawBoard();
+	SDL_RenderPresent(renderer);
+}
+
+void Window::run(){
+	while (running) {
+		Uint32 sdlTicks = SDL_GetTicks();
+		Uint32 nextTick = sdlTicks + tickInterval;
+		draw();
+
+		SDL_Event event;
+		while (SDL_PollEvent(&event)) {
+			switch (event.type) {
+			case SDL_QUIT:
+				running = false;
+				SDL_Quit();
+				break;
+
+			case SDL_MOUSEBUTTONDOWN:
+				if (event.button.button == SDL_BUTTON_LEFT) {
+					int x = event.button.y / 64;
+					int y = event.button.x / 64;
+					gb->move(x, y);
+				}
+				break;
+			}
+		}
+
+		int delay = nextTick - SDL_GetTicks();
+		if (delay > 0)
+			SDL_Delay(delay);
+	}
+}

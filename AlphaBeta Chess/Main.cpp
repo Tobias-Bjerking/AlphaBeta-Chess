@@ -1,13 +1,12 @@
-#include "GameBoard.h"
+#include "Window.h"
 
 
 using namespace std;
 int main(int argc, char** argv) {
 
-	GameBoard& gb = GameBoard::getInstance();
-
-	gb.setUpBoard();
-	gb.run();
+	Window& window = Window::getInstance();
+	window.setUpBoard();
+	window.run();
 
 	return 0;
 }

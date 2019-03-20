@@ -1,5 +1,5 @@
 #include "Piece.h"
-#include "GameBoard.h"
+#include "Window.h"
 #include <iostream>
 
 
@@ -18,12 +18,12 @@ Piece::Piece(Color color, std::string imagePath){
 		throw std::runtime_error("Could not load file: " + imagePath);
 	}
 
-	texture = SDL_CreateTextureFromSurface(GameBoard::getInstance().renderer, surface);
+	texture = SDL_CreateTextureFromSurface(Window::getInstance().renderer, surface);
 	SDL_FreeSurface(surface);
 }
 
 void Piece::draw(SDL_Rect rect) {
-	SDL_RenderCopy(GameBoard::getInstance().renderer, texture, NULL, &rect);
+	SDL_RenderCopy(Window::getInstance().renderer, texture, NULL, &rect);
 }
 
 Piece::~Piece(){
