@@ -10,9 +10,35 @@ GameBoard::GameBoard(){
 	renderer = SDL_CreateRenderer(window, -1, 0);
 }
 
-void GameBoard::setUpBoard(){
-	pieces[4][4] = new Pawn(WHITE);
-	pieces[3][3] = new Pawn(BLACK);
+void GameBoard::setUpBoard() {
+
+	for (int i = 0; i < 8; i++) {
+		pieces[1][i] = new Pawn(BLACK);
+		pieces[6][i] = new Pawn(WHITE);
+	}
+
+	pieces[0][0] = new Rook(BLACK);
+	pieces[0][7] = new Rook(BLACK);
+	pieces[7][0] = new Rook(WHITE);
+	pieces[7][7] = new Rook(WHITE);
+
+	pieces[0][1] = new Knight(BLACK);
+	pieces[0][6] = new Knight(BLACK);
+	pieces[7][1] = new Knight(WHITE);
+	pieces[7][6] = new Knight(WHITE);
+
+	pieces[0][2] = new Bishop(BLACK);
+	pieces[0][5] = new Bishop(BLACK);
+	pieces[7][2] = new Bishop(WHITE);
+	pieces[7][5] = new Bishop(WHITE);
+
+	pieces[0][3] = new Queen(BLACK);
+	pieces[7][3] = new Queen(WHITE);
+
+	pieces[0][4] = new King(BLACK);
+	pieces[7][4] = new King(WHITE);
+
+
 }
 
 
@@ -71,9 +97,9 @@ void GameBoard::drawBoard(){
 		}
 	}
 
-	SDL_Rect rect = { 8*64, 0, 64, 8*64 };
+	/*SDL_Rect rect = { 8*64, 0, 64, 8*64 };
 	SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
-	SDL_RenderFillRect(renderer, &rect);
+	SDL_RenderFillRect(renderer, &rect);*/
 
 	for (int i = 0; i < 8; i++){
 		for (int j = 0; j < 8; j++) {

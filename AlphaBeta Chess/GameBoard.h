@@ -9,6 +9,11 @@
 #include <vector>
 #include "Piece.h"
 #include "Pawn.h"
+#include "Rook.h"
+#include "Knight.h"
+#include "Bishop.h"
+#include "Queen.h"
+#include "King.h"
 
 class GameBoard{
 
@@ -35,7 +40,7 @@ private:
 	const GameBoard& operator=(const GameBoard& other) = delete;
 
 	SDL_Window* window;
-	int window_width = 576;
+	int window_width = 512;
 	int window_height = 512;
 	bool running = true;
 	const int tickInterval = 1000 / 30;
