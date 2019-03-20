@@ -1,5 +1,6 @@
 #include "Piece.h"
 #include "GameBoard.h"
+#include <iostream>
 
 
 Piece::Piece(Color color, std::string imagePath){
@@ -8,12 +9,15 @@ Piece::Piece(Color color, std::string imagePath){
 		imagePath.append("_W.png");
 	}
 	else {
-		imagePath.append("_B.png")
+		imagePath.append("_B.png");
 	}
+
 	SDL_Surface* surface = IMG_Load(imagePath.c_str());
+
 	if (!surface) {
 		throw std::runtime_error("Could not load file: " + imagePath);
 	}
+
 	texture = SDL_CreateTextureFromSurface(GameBoard::getInstance().renderer, surface);
 	SDL_FreeSurface(surface);
 }
