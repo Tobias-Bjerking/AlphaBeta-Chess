@@ -13,20 +13,56 @@ Bishop::~Bishop()
 
 std::vector<Position*> Bishop::getPossibleMoves(int x, int y){
 	std::vector<Position*> possiblePositions;
-	if (color == BLACK) {
-
-		if (Window::getInstance().gb->pieces[x - 1][y + 1] != nullptr && Window::getInstance().gb->pieces[x - 1][y + 1]->color != color)
-			possiblePositions.push_back(new Position(x - 1, y + 1));
-		possiblePositions.push_back(new Position(x, y + 1));
-		if (Window::getInstance().gb->pieces[x + 1][y + 1] != nullptr && Window::getInstance().gb->pieces[x + 1][y + 1]->color != color)
-			possiblePositions.push_back(new Position(x + 1, y + 1));
+	for (int i = x + 1; i < 8; i++) {
+		for (int j = y + 1; j < 8; j++) {
+			if (Window::getInstance().gb->pieces[i][j] == nullptr)
+				possiblePositions.push_back(new Position(i, j));
+			else if (Window::getInstance().gb->pieces[i][j]->color != color) {
+				possiblePositions.push_back(new Position(i, j));
+				break;
+			}
+			else
+				break;
+		}
 	}
-	else {
-		if (Window::getInstance().gb->pieces[x - 1][y - 1] != nullptr && Window::getInstance().gb->pieces[x - 1][y - 1]->color != color)
-			possiblePositions.push_back(new Position(x - 1, y - 1));
-		possiblePositions.push_back(new Position(x, y - 1));
-		if (Window::getInstance().gb->pieces[x + 1][y - 1] != nullptr && Window::getInstance().gb->pieces[x + 1][y - 1]->color != color)
-			possiblePositions.push_back(new Position(x + 1, y - 1));
+
+	for (int i = x + 1; i < 8; i++) {
+		for (int j = y - 1; j >=0; j--) {
+			if (Window::getInstance().gb->pieces[i][j] == nullptr)
+				possiblePositions.push_back(new Position(i, j));
+			else if (Window::getInstance().gb->pieces[i][j]->color != color) {
+				possiblePositions.push_back(new Position(i, j));
+				break;
+			}
+			else
+				break;
+		}
+	}
+
+	for (int i = x - 1; i >= 0; i--) {
+		for (int j = y + 1; j < 8; j++) {
+			if (Window::getInstance().gb->pieces[i][j] == nullptr)
+				possiblePositions.push_back(new Position(i, j));
+			else if (Window::getInstance().gb->pieces[i][j]->color != color) {
+				possiblePositions.push_back(new Position(i, j));
+				break;
+			}
+			else
+				break;
+		}
+	}
+
+	for (int i = x - 1; i >= 0; i--) {
+		for (int j = y - 1; j >= 0; j--) {
+			if (Window::getInstance().gb->pieces[i][j] == nullptr)
+				possiblePositions.push_back(new Position(i, j));
+			else if (Window::getInstance().gb->pieces[i][j]->color != color) {
+				possiblePositions.push_back(new Position(i, j));
+				break;
+			}
+			else
+				break;
+		}
 	}
 	return possiblePositions;
 }
