@@ -6,6 +6,8 @@ public:
 	Queen(Color color);
 	~Queen();
 
+	int value = 9;
+
 	std::vector<Position*> getPossibleMoves(int x, int y);
 };
 

@@ -5,6 +5,8 @@ public:
 	Knight(Color color);
 	~Knight();
 
+	int value = 3;
+
 	std::vector<Position*> getPossibleMoves(int x, int y);
 };
 

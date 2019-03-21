@@ -14,7 +14,10 @@ public:
 
 	void draw(SDL_Rect);
 
+
+	int value;
 	virtual std::vector<Position*> getPossibleMoves(int x, int y) = 0;
+	
 	Color color;
 private:
 	
