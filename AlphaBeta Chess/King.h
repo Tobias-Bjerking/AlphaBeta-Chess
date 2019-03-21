@@ -10,6 +10,8 @@ public:
 		return 100000;
 	}
 
+	King(const King* old_obj) :Piece(old_obj->color) {}
+
 	std::vector<Position*> getPossibleMoves(int x, int y);
 };
 

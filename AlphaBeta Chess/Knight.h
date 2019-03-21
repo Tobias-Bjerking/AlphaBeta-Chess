@@ -10,6 +10,8 @@ public:
 		return 3;
 	}
 
+	Knight(const Knight* old_obj) :Piece(old_obj->color) {}
+
 	std::vector<Position*> getPossibleMoves(int x, int y);
 };
 

@@ -8,6 +8,7 @@ enum Color { WHITE, BLACK };
 class Piece
 {
 public:
+	Piece(Color color);
 	Piece(Color color, std::string iamgePath);
 	~Piece();
 	SDL_Texture* texture;

@@ -10,6 +10,8 @@ public:
 		return 9;
 	}
 
+	Queen(const Queen* old_obj) :Piece(old_obj->color) {}
+
 	std::vector<Position*> getPossibleMoves(int x, int y);
 };
 
