@@ -20,6 +20,9 @@ public:
 	Piece* pieces[8][8];
 	int value[8][8];
 
+	int blackTotal = 0;
+	int whiteTotal = 0;
+
 	GameBoard();
 	~GameBoard();
 private:
