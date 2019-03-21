@@ -32,8 +32,39 @@ void GameBoard::setUpBoard() {
 
 	pieces[0][4] = new King(BLACK);
 	pieces[7][4] = new King(WHITE);
+
+	setUpValueBoard();
 }
 
+void GameBoard::setUpValueBoard() {
+	for (int i = 0; i < 8; i++) {
+		value[0][i] = 0;
+		value[i][0] = 0;
+		value[7][i] = 0;
+		value[i][7] = 0;
+	}
+
+	for (int i = 1; i < 7; i++) {
+		value[1][i] = 1;
+		value[i][1] = 1;
+		value[6][i] = 1;
+		value[i][6] = 1;
+	}
+
+	for (int i = 2; i < 6; i++) {
+		value[2][i] = 2;
+		value[i][2] = 2;
+		value[5][i] = 2;
+		value[i][5] = 2;
+	}
+
+	for (int i = 3; i < 5; i++) {
+		value[3][i] = 3;
+		value[i][3] = 3;
+		value[4][i] = 3;
+		value[i][4] = 3;
+	}
+}
 
 GameBoard::~GameBoard(){
 	

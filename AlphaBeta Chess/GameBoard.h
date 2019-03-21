@@ -18,11 +18,13 @@ public:
 
 	
 	Piece* pieces[8][8];
+	int value[8][8];
 
 	GameBoard();
 	~GameBoard();
 private:
 	Position* selected = nullptr;
+	void setUpValueBoard();
 
 
 };
