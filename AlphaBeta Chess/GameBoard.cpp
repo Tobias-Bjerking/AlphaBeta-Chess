@@ -98,7 +98,7 @@ GameBoard::~GameBoard(){
 	}
 }
 
-void GameBoard::move(int x, int y){
+bool GameBoard::move(int x, int y, Color color){
 	if (selected) {
 		bool canMove = false;
 		std::vector<Position*> poslist = pieces[selected->x][selected->y]->getPossibleMoves(selected->x, selected->y);
@@ -134,16 +134,19 @@ void GameBoard::move(int x, int y){
 			selected = nullptr;
 			std::cout << "black total: " << blackTotal << std::endl;
 			std::cout << "white total: " << whiteTotal << std::endl;
+
+			return true;
 		}
 		else {
 			selected = nullptr;
 		}
 	}
 	else {
-		if (pieces[x][y] != nullptr) {
+		if (pieces[x][y] != nullptr && pieces[x][y]->color == color) {
 			selected = new Position(x, y);
 		}
 	}
+	return false;
 }
 
 void GameBoard::drawBoard(){
@@ -180,4 +183,8 @@ void GameBoard::drawBoard(){
 	}
 
 
+}
+
+bool GameBoard::runAI(){
+	return true;
 }

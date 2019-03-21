@@ -35,24 +35,29 @@ void Window::run(){
 		Uint32 nextTick = sdlTicks + tickInterval;
 		draw();
 
-		SDL_Event event;
-		while (SDL_PollEvent(&event)) {
-			switch (event.type) {
-			case SDL_QUIT:
-				running = false;
-				SDL_Quit();
-				break;
-
-			case SDL_MOUSEBUTTONDOWN:
-				if (event.button.button == SDL_BUTTON_LEFT) {
-					int x = event.button.y / 64;
-					int y = event.button.x / 64;
-					gb->move(x, y);
+		if (whitesTurn) {
+			SDL_Event event;
+			while (SDL_PollEvent(&event)) {
+				switch (event.type) {
+				case SDL_QUIT:
+					running = false;
+					SDL_Quit();
+					break;
+	
+				case SDL_MOUSEBUTTONDOWN:
+					if (event.button.button == SDL_BUTTON_LEFT) {
+						int x = event.button.y / 64;
+						int y = event.button.x / 64;
+						whitesTurn =  !(gb->move(x, y, WHITE));
+					}
+					break;
 				}
-				break;
 			}
-		}
 
+		}
+		else {
+			whitesTurn = gb->runAI();
+		}
 		int delay = nextTick - SDL_GetTicks();
 		if (delay > 0)
 			SDL_Delay(delay);

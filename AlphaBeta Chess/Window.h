@@ -22,6 +22,8 @@ public:
 	void draw();
 	void run();
 
+	bool whitesTurn = true;
+
 	GameBoard* gb;
 	SDL_Renderer* renderer;
 
