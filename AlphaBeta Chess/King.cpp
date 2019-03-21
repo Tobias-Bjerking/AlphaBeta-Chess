@@ -6,8 +6,8 @@ King::King(Color color): Piece(color, "Images/King"){
 }
 
 
-King::~King()
-{
+King::~King(){
+	Window::getInstance().gameOver(color);
 }
 
 std::vector<Position*> King::getPossibleMoves(int x, int y){

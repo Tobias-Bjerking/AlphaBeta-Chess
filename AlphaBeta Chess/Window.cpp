@@ -67,3 +67,7 @@ void Window::run(){
 			SDL_Delay(delay);
 	}
 }
+
+void Window::gameOver(Color color){
+	running = false;
+}

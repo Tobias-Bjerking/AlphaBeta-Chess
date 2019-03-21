@@ -27,6 +27,8 @@ public:
 	GameBoard* gb;
 	SDL_Renderer* renderer;
 
+	void gameOver(Color color);
+
 private:
 	Window(const Window& other) = delete;
 	const Window& operator=(const Window& other) = delete;
