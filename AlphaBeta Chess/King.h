@@ -6,7 +6,9 @@ public:
 	King(Color color);
 	~King();
 
-	int value = INT_MAX;
+	int getValue() {
+		return 100000;
+	}
 
 	std::vector<Position*> getPossibleMoves(int x, int y);
 };

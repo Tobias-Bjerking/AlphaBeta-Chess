@@ -5,7 +5,9 @@ public:
 	Pawn(Color color);
 	~Pawn();
 
-	int value = 1;
+	int getValue() {
+		return 1;
+	}
 
 	std::vector<Position*> getPossibleMoves(int x, int y);
 
