@@ -49,8 +49,10 @@ void GameBoard::move(int x, int y){
 		bool canMove = false;
 		std::vector<Position*> poslist = pieces[selected->x][selected->y]->getPossibleMoves(selected->x, selected->y);
 		for (Position* p : poslist) {
-			if (p->x == x && p->y == y)
+			if (p->x == x && p->y == y) {
 				canMove = true;
+				break;
+			}
 		}
 		if (canMove) {
 			pieces[x][y] = pieces[selected->x][selected->y];
