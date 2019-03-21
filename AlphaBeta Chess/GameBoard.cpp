@@ -83,6 +83,17 @@ void GameBoard::drawBoard(){
 		}
 	}
 
+	if (selected) {
+		SDL_Rect rect = { selected->y * 64, selected->x * 64, 64, 64 };
+		SDL_SetRenderDrawColor(Window::getInstance().renderer, 255, 223, 0, 255);
+		SDL_RenderFillRect(Window::getInstance().renderer, &rect);
+		for (Position* p : pieces[selected->x][selected->y]->getPossibleMoves(selected->x, selected->y)) {
+			SDL_Rect rect = { p->y * 64, p->x * 64, 64, 64 };
+			SDL_SetRenderDrawColor(Window::getInstance().renderer, 0, 255, 227, 255);
+			SDL_RenderFillRect(Window::getInstance().renderer, &rect);
+		}
+	}
+
 	for (int i = 0; i < 8; i++){
 		for (int j = 0; j < 8; j++) {
 			if (pieces[i][j]) {
@@ -91,4 +102,6 @@ void GameBoard::drawBoard(){
 			}
 		}
 	}
+
+
 }
