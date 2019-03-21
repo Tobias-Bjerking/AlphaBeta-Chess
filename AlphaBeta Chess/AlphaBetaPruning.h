@@ -2,7 +2,7 @@
 #include "GameBoard.h"
 class AlphaBetaPruning{
 public:
-	AlphaBetaPruning(GameBoard& board);
+	AlphaBetaPruning(GameBoard& board, int& xdest, int& ydest);
 	~AlphaBetaPruning();
 
 
@@ -13,7 +13,7 @@ public:
 	}
 
 private:
-	Position* alphaBeta(GameBoard& board);
+	Position* alphaBeta(GameBoard& board, int& xdest, int& ydest);
 	int alphaBeta(GameBoard& board, int depth, int alpha, int beta, bool cpuTurn);
 	Position* bestPosition;
 

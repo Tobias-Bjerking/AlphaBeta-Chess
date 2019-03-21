@@ -55,9 +55,11 @@ void Window::run(){
 
 		}
 		else {
-			AlphaBetaPruning* ab = new AlphaBetaPruning(*gb);
+			int xdest = 0 , ydest = 0;
+			AlphaBetaPruning* ab = new AlphaBetaPruning(*gb, xdest, ydest);
 			Position* p = ab->getOptimalMove();
-			whitesTurn = gb->move(p->x, p->y, BLACK);
+			gb->move(p->x, p->y, xdest, ydest);
+			whitesTurn = true;
 			delete ab;
 		}
 		int delay = nextTick - SDL_GetTicks();

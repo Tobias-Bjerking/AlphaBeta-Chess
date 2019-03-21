@@ -3,31 +3,33 @@
 
 
 
-AlphaBetaPruning::AlphaBetaPruning(GameBoard& board){
-	bestPosition = alphaBeta(board);
+AlphaBetaPruning::AlphaBetaPruning(GameBoard& board, int& xdest, int& ydest){
+	bestPosition = alphaBeta(board, xdest, ydest);
 }
 
 
 AlphaBetaPruning::~AlphaBetaPruning(){
 }
 
-Position* AlphaBetaPruning::alphaBeta(GameBoard& board){
+Position* AlphaBetaPruning::alphaBeta(GameBoard& board, int& xdest, int& ydest){
 	int bestValue = INT_MIN;
 	int x = 0, y = 0;
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			if (board.pieces[i][j] != nullptr && board.pieces[i][j]->color == BLACK) {
-				//std::cout << i << ", " << j << std::endl;
 				for (Position* p : board.pieces[i][j]->getPossibleMoves(i, j)) {
-					GameBoard b = board;
+					GameBoard& b = *new GameBoard();
+					b = board;
 					b.move(i, j, p->x, p->y);
-					int v = alphaBeta(b, 0, INT_MIN, INT_MAX, false);
+					int v = alphaBeta(b, 2, INT_MIN, INT_MAX, false);
 					if (v > bestValue) {
 						bestValue = v;
 						x = i;
 						y = j;
-
+						xdest = p->x;
+						ydest = p->y;
 					}
+					delete &b;
 				}
 			}
 		}
@@ -51,7 +53,8 @@ int AlphaBetaPruning::alphaBeta(GameBoard& board, int depth, int alpha, int beta
 			for (int j = 0; j < 8; j++) {
 				if (board.pieces[i][j] != nullptr && board.pieces[i][j]->color == BLACK) {
 					for (Position* p : board.pieces[i][j]->getPossibleMoves(i, j)) {
-						GameBoard gb = board;
+						GameBoard& gb = *new GameBoard();
+						gb = board;
 						gb.move(i, j, p->x, p->y);
 						int value = alphaBeta(gb, depth - 1, alpha, beta, !cpuTurn);
 						maxValue = max(maxValue, value);
@@ -71,7 +74,8 @@ int AlphaBetaPruning::alphaBeta(GameBoard& board, int depth, int alpha, int beta
 			for (int j = 0; j < 8; j++) {
 				if (board.pieces[i][j] != nullptr && board.pieces[i][j]->color == WHITE) {
 					for (Position* p : board.pieces[i][j]->getPossibleMoves(i, j)) {
-						GameBoard gb = board;
+						GameBoard& gb = *new GameBoard();
+						gb = board;
 						gb.move(i, j, p->x, p->y);
 						int value = alphaBeta(gb, depth - 1, alpha, beta, !cpuTurn);
 						minValue = min(minValue, value);

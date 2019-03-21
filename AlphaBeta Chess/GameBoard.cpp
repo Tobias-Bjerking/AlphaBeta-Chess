@@ -3,8 +3,7 @@
 
 #include <iostream>
 
-GameBoard::GameBoard(){
-}
+GameBoard::GameBoard(){}
 
 void GameBoard::setUpBoard() {
 	for (int i = 0; i < 8; i++) {
@@ -148,8 +147,7 @@ bool GameBoard::move(int x, int y, Color color){
 }
 
 void GameBoard::move(int x, int y, int dx, int dy){
-	std::cout << x << ", " << y << std::endl;
-	//if (dynamic_cast<King*>(pieces[x][y])==nullptr) {
+	if (dynamic_cast<King*>(pieces[x][y])==nullptr) {
 		if (pieces[x][y]->color == BLACK) {
 			blackTotal -= pieces[x][y]->getValue() * value[x][y];
 			blackTotal += pieces[x][y]->getValue() * value[dx][dy];
@@ -158,7 +156,7 @@ void GameBoard::move(int x, int y, int dx, int dy){
 			whiteTotal -= pieces[x][y]->getValue() * value[x][y];
 			whiteTotal += pieces[x][y]->getValue() * value[dx][dy];
 		}
-	//}
+	}
 	if (pieces[dx][dy] != nullptr) {
 		if (pieces[dx][dy]->color == BLACK) {
 			blackTotal -= pieces[dx][dy]->getValue() * value[dx][dy];
