@@ -55,7 +55,7 @@ void Window::run(){
 
 		}
 		else {
-			AlphaBetaPruning* ab = new AlphaBetaPruning(gb);
+			AlphaBetaPruning* ab = new AlphaBetaPruning(*gb);
 			Position* p = ab->getOptimalMove();
 			whitesTurn = gb->move(p->x, p->y, BLACK);
 			delete ab;

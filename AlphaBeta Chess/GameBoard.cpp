@@ -110,7 +110,7 @@ bool GameBoard::move(int x, int y, Color color){
 		}
 		if (canMove) {
 			
-			if (!dynamic_cast<King*>(pieces[selected->x][selected->y])) {
+			if (dynamic_cast<King*>(pieces[selected->x][selected->y]) == nullptr) {
 				if (pieces[selected->x][selected->y]->color == BLACK) {
 					blackTotal -= pieces[selected->x][selected->y]->getValue() * value[selected->x][selected->y];
 					blackTotal += pieces[selected->x][selected->y]->getValue() * value[x][y];
@@ -132,8 +132,6 @@ bool GameBoard::move(int x, int y, Color color){
 			pieces[x][y] = pieces[selected->x][selected->y];
 			pieces[selected->x][selected->y] = nullptr;
 			selected = nullptr;
-			std::cout << "black total: " << blackTotal << std::endl;
-			std::cout << "white total: " << whiteTotal << std::endl;
 
 			return true;
 		}
@@ -147,6 +145,31 @@ bool GameBoard::move(int x, int y, Color color){
 		}
 	}
 	return false;
+}
+
+void GameBoard::move(int x, int y, int dx, int dy){
+	std::cout << x << ", " << y << std::endl;
+	//if (dynamic_cast<King*>(pieces[x][y])==nullptr) {
+		if (pieces[x][y]->color == BLACK) {
+			blackTotal -= pieces[x][y]->getValue() * value[x][y];
+			blackTotal += pieces[x][y]->getValue() * value[dx][dy];
+		}
+		else {
+			whiteTotal -= pieces[x][y]->getValue() * value[x][y];
+			whiteTotal += pieces[x][y]->getValue() * value[dx][dy];
+		}
+	//}
+	if (pieces[dx][dy] != nullptr) {
+		if (pieces[dx][dy]->color == BLACK) {
+			blackTotal -= pieces[dx][dy]->getValue() * value[dx][dy];
+		}
+		else {
+			whiteTotal -= pieces[dx][dy]->getValue() * value[dx][dy];
+		}
+	}
+
+	pieces[dx][dy] = pieces[x][y];
+	pieces[x][y] = nullptr;
 }
 
 void GameBoard::drawBoard(){

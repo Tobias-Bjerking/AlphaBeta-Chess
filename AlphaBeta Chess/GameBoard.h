@@ -14,6 +14,9 @@ public:
 
 	void setUpBoard();
 	bool move(int x, int y, Color color);
+
+	void move(int x, int y, int dx, int dy);
+
 	void drawBoard();
 	
 	Piece* pieces[8][8];
