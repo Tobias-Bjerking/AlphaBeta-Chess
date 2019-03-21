@@ -127,7 +127,7 @@ bool GameBoard::move(int x, int y, Color color){
 					whiteTotal -= pieces[x][y]->getValue() * value[x][y];
 				}
 			}
-			delete pieces[x][y];
+
 			pieces[x][y] = pieces[selected->x][selected->y];
 			pieces[selected->x][selected->y] = nullptr;
 			selected = nullptr;

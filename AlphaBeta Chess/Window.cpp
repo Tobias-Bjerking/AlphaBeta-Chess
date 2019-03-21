@@ -35,6 +35,18 @@ void Window::run(){
 		draw();
 
 		if (whitesTurn) {
+			int kings = 0;
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 8; j++) {
+					if (gb->pieces[i][j] != nullptr)
+						if (dynamic_cast<King*>(gb->pieces[i][j]))
+							kings++;
+				}
+			}
+
+			if (kings < 2)
+				gameOver(BLACK);
+
 			SDL_Event event;
 			while (SDL_PollEvent(&event)) {
 				switch (event.type) {

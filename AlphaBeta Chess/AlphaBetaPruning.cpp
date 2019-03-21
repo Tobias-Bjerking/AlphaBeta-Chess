@@ -21,7 +21,7 @@ Position* AlphaBetaPruning::alphaBeta(GameBoard& board, int& xdest, int& ydest){
 					GameBoard& b = *new GameBoard();
 					b = board;
 					b.move(i, j, p->x, p->y);
-					int v = alphaBeta(b, 3, INT_MIN, INT_MAX, false);
+					int v = alphaBeta(b, 2, INT_MIN, INT_MAX, false);
 					if (v > bestValue) {
 						bestValue = v;
 						x = i;
@@ -43,7 +43,7 @@ int AlphaBetaPruning::alphaBeta(GameBoard& board, int depth, int alpha, int beta
 	if (depth <= 0) {
 		int black = board.blackTotal;
 		int white = board.whiteTotal;
-		return white > black ? white * -1 : black;
+		return black - white;
 	}
 
 	if (cpuTurn) {
