@@ -184,7 +184,3 @@ void GameBoard::drawBoard(){
 
 
 }
-
-bool GameBoard::runAI(){
-	return true;
-}

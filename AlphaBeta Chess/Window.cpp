@@ -1,6 +1,5 @@
 #include "Window.h"
-
-
+#include "AlphaBetaPruning.h"
 
 Window::Window(){
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -56,7 +55,10 @@ void Window::run(){
 
 		}
 		else {
-			whitesTurn = gb->runAI();
+			AlphaBetaPruning* ab = new AlphaBetaPruning(gb);
+			Position* p = ab->getOptimalMove();
+			whitesTurn = gb->move(p->x, p->y, BLACK);
+			delete ab;
 		}
 		int delay = nextTick - SDL_GetTicks();
 		if (delay > 0)

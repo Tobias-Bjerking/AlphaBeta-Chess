@@ -15,7 +15,6 @@ public:
 	void setUpBoard();
 	bool move(int x, int y, Color color);
 	void drawBoard();
-	bool runAI();
 	
 	Piece* pieces[8][8];
 	int value[8][8];
